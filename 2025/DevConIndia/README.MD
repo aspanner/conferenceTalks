@@ -6,4 +6,4 @@ There is a CLI way to achieve this but for first time uses we are utilizing awes
 Install Podman Desktop on your Fedora, Linux, Windows or Mac machine.
 
 ## Start Podman Desktop
-
+2025/DevConIndia/Screenshot From 2025-02-05 17-58-27.png
