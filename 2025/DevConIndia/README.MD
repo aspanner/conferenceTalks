@@ -20,4 +20,9 @@ On the left hand side go the 2nd icon from the top (looks like a container and t
 
 Next, click on the button 'Containerfile or Dockerfile' and select the Containerfile you'd like to base your operating system image build up. As we are at the beginning of the lession I suggest you use the file Containerfile1 within this repository: ![Containerfile1](./Containerfile1)
 
+Get this Containerfile onto your local machine and select it as input; your screen will then look like similar to this:
+Set the configuration according to the screen below and hit 'Build'; Sitback and enjoy this moment! Your container (not OS image yet!) is building!
+You should eventually see the success message as per below:
+
+![Podman Build Completed](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/podmanbuilddone.png?raw=true)
 
