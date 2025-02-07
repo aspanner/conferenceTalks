@@ -14,5 +14,9 @@ If you've got everything right then starting your Podman Desktop should greet yo
 ##Building your first operating system iso image
 Without further delay, let's get cracking to get the first operating system build underway. After all time is money the Wolf of Wallstreet once said to me - when I was young.
 
-On the left hand side go the 2nd icon from the top (looks like a container and the tooltip reads 'Containers') and click it. On that screen then click on the top right hand side the '+ Create' button.
+On the left hand side go the 2nd icon from the top (looks like a container and the tooltip reads 'Containers') and click it. On that screen then click on the top right hand side the '+ Create' button. Your screen should look like this:
+
+![Podman Desktop Startup Screen](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/PodmanDesktopContainerCreate.png?raw=true)
+
+
 
