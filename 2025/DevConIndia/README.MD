@@ -10,3 +10,8 @@ A good place to start is here: https://podman-desktop.io/docs/installation
 If you've got everything right then starting your Podman Desktop should greet you with a screen similar to this:
 
 ![Podman Desktop Startup Screen](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/PodmanDesktopStartupScreen2.png?raw=true)
+
+##Building your first operating system iso image
+Without further delay, let's get cracking to get the first operating system build underway. After all time is money the Wolf of Wallstreet once said to me - when I was young.
+
+
