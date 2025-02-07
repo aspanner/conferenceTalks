@@ -18,5 +18,6 @@ On the left hand side go the 2nd icon from the top (looks like a container and t
 
 ![Podman Desktop Startup Screen](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/PodmanDesktopContainerCreate.png?raw=true)
 
+Next, click on the button 'Containerfile or Dockerfile' and select the Containerfile you'd like to base your operating system image build up. As we are at the beginning of the lession I suggest you use the file Containerfile1 within this repository: 2025/DevConIndia/Containerfile1
 
 
