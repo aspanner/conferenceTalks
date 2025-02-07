@@ -1,0 +1,11 @@
+#use rhel 9.5 bootc container image as base image
+FROM registry.redhat.io/rhel9/rhel-bootc:9.5
+
+#install httpd, mariadb and php
+RUN dnf install -y httpd
+
+#enable httpd, mariadb and php to start automatically on boot
+RUN systemctl enable httpd 
+
+#create an awe inspiring homepage, add the buildtime of the image as reference
+RUN echo '<h1 style="text-align:center;">Welcome to RHEL image mode - build time '$(date)' </h1> <?php phpinfo(); ?>' >> /var/www/html/index.php
