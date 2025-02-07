@@ -4,7 +4,9 @@ There is a CLI way to achieve this but for first time uses we are utilizing awes
 
 ## First Things First
 Install Podman Desktop on your Fedora, Linux, Windows or Mac machine.
+A good place to start is here: https://podman-desktop.io/docs/installation
 
 ## Start Podman Desktop
-https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/Screenshot%20From%202025-02-05%2017-58-27.png?raw=true
+If you've got everything right then starting your Podman Desktop should greet you with a screen similar to this:
 
+![Podman Desktop Startup Screen](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/PodmanStartupScreen.png?raw=true)
