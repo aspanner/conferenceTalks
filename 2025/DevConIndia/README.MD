@@ -9,4 +9,4 @@ A good place to start is here: https://podman-desktop.io/docs/installation
 ## Start Podman Desktop
 If you've got everything right then starting your Podman Desktop should greet you with a screen similar to this:
 
-![Podman Desktop Startup Screen](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/PodmanStartupScreen2.png?raw=true)
+![Podman Desktop Startup Screen](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/PodmanDesktopStartupScreen2.png?raw=true)
