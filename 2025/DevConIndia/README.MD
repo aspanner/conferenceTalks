@@ -28,6 +28,6 @@ You should eventually see the success message as per below:
 
 Under images in Podman Desktop you can now see your image (in my case andreas1) freshly backed and tagged:
 
-![Podman image registry] (https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/podmanImagesShowAndreas1.png?raw=true)
+![Podman image registry](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/podmanImagesShowAndreas1.png?raw=true)
 
 
