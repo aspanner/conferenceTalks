@@ -53,4 +53,14 @@ In order to build your OS image go to the 'Bootable Containers' Extension at the
 ![Podman image registry](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/PodmanBuildOSImageConfig.png?raw=true)
 
 Then hit the build button and observe what happens.
+* What are you observing?
+* How long does the OS image build take compared to the container image build?
+
+
+![Podman image registry](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/PodmanOSImageBuildSuccessfully.png?raw=true)
+
+
+Once you see the final 'manifest - finished successfully' message you should find your freshly baked iso image in the folder you specified. In order to test you can either:
+a) Copy the iso onto a bootable USB stick and boot from the USB or
+b) Boot a virtual machine up with that created 'install.iso' file
 
