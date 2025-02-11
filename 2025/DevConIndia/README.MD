@@ -34,3 +34,14 @@ On your container image (in my case andreas1) click the Play (>) button and conf
 
 ![Podman image registry](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/PodmanRunImage.png?raw=true)
 
+Explore your running image:
+* What's the containers IP address?
+* How do I login?
+* Can I access the terminal without login?
+* Where is my index.php file I created?
+* Can I curl my webserver?
+
+Once your excitement and associated pulse rate is coming down it might be time for your to start building an operating system instance from your container image.
+
+In order to build your OS image go back to your iamges in Podman Desktop and click the 'Build' icon in the top right corner.
+
