@@ -11,7 +11,7 @@ If you've got everything right then starting your Podman Desktop should greet yo
 
 ![Podman Desktop Startup Screen](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/PodmanDesktopStartupScreen2.png?raw=true)
 
-##Building your first operating system iso image
+## Building your first operating system iso image
 Without further delay, let's get cracking to get the first operating system build underway. After all time is money the Wolf of Wallstreet once said to me - when I was young.
 
 On the left hand side go the 2nd icon from the top (looks like a container and the tooltip reads 'Containers') and click it. On that screen then click on the top right hand side the '+ Create' button. Your screen should look like this:
@@ -80,7 +80,7 @@ and auto configuring...
 ...and finally up and running!
 ![Fedora up and Running!](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/FedoraHttpdRunning.png?raw=true)
 
-#Congratulations!
+# Congratulations!
 You have now completed the journey from creating a containerfile, built a container and subsequently built an Operating system originating from the very same Containerfile!
 
 Feel Proud and let's move to the next exercise...
