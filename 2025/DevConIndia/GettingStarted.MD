@@ -45,10 +45,10 @@ Once your excitement and associated pulse rate is coming down it might be time f
 
 In order to build your OS image go to the 'Bootable Containers' Extension at the bottom left and make the configurations as per the screenshot items marked in red:
 
-* select the previously created container image
-* select and output folder the OS image will be built into
-* select the image you'd like to create (I've selected an iso image)
-* add users and ssh keys
+* Select the previously created container image
+* Select and output folder the OS image will be built into
+* Select the image you'd like to create (I've selected an iso image)
+* Add users and ssh keys
 
 ![Podman image registry](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/PodmanBuildOSImageConfig.png?raw=true)
 
