@@ -72,11 +72,9 @@ We are now going to test our newly created Fedora Operating System which we buil
 ![Virtual Machine configuration with KVM via Cockpit](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/FedoraVMCreation.png?raw=true)
 
 ## Then observe your new Fedora instance booting up and configuring itself:
-![Fedora booting]
-(https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/FedoraISOBooting.png?raw=true)
+![Fedora booting](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/FedoraIsoBooting.png?raw=true)
 
 and auto configuring...
-![Fedora auto configuration]
-(https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/FedoraInstalling2.png?raw=true)
+![Fedora auto configuration](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/FedoraInstalling2.png?raw=true)
 
 
