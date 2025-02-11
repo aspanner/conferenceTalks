@@ -43,5 +43,6 @@ Explore your running image:
 
 Once your excitement and associated pulse rate is coming down it might be time for your to start building an operating system instance from your container image.
 
-In order to build your OS image go back to your iamges in Podman Desktop and click the 'Build' icon in the top right corner.
+In order to build your OS image go to the 'Bootable Containers' Extension at the bottom left:
+![Podman image registry](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/PodmanBuildOSImageConfig.png?raw=true)
 
