@@ -69,11 +69,14 @@ b) Boot a virtual machine up with that created 'install.iso' file
 We are now going to test our newly created Fedora Operating System which we built based on a Containerfile and a bootc container image.
 
 ## First we create a virtual machine via a hypervisor (here KVM on my Fedora 41 laptop)
-(https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/FedoraVMCreation.png?raw=true)
+![Virtual Machine configuration with KVM via Cockpit](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/FedoraVMCreation.png?raw=true)
 
 ## Then observe your new Fedora instance booting up and configuring itself:
+![Fedora booting]
 (https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/FedoraISOBooting.png?raw=true)
 
+and auto configuring...
+![Fedora auto configuration]
 (https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/FedoraInstalling2.png?raw=true)
 
 
