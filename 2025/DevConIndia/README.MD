@@ -57,10 +57,23 @@ Then hit the build button and observe what happens.
 * How long does the OS image build take compared to the container image build?
 
 
-![Podman image registry](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/PodmanOSImageBuildSuccessfully.png?raw=true)
+![Podman Operating System Build successful!](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/PodmanOSImageBuildSuccessfully.png?raw=true)
 
 
 Once you see the final 'manifest - finished successfully' message you should find your freshly baked iso image in the folder you specified. In order to test you can either:
 a) Copy the iso onto a bootable USB stick and boot from the USB or
 b) Boot a virtual machine up with that created 'install.iso' file
+
+
+# Now let's test it!
+We are now going to test our newly created Fedora Operating System which we built based on a Containerfile and a bootc container image.
+
+## First we create a virtual machine via a hypervisor (here KVM on my Fedora 41 laptop)
+(https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/FedoraVMCreation.png?raw=true)
+
+## Then observe your new Fedora instance booting up and configuring itself:
+(https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/FedoraISOBooting.png?raw=true)
+
+(https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/FedoraInstalling2.png?raw=true)
+
 
