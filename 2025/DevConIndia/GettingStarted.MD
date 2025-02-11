@@ -26,11 +26,11 @@ You should eventually see the success message as per below:
 
 ![Podman Build Completed](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/podmanbuilddone.png?raw=true)
 
-Under images in Podman Desktop you can now see your image (in my case andreas1) freshly backed and tagged:
+Under images in Podman Desktop you can now see your image (in my case andreas1) freshly baked (and still warm) and tagged:
 
 ![Podman image registry](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/podmanImagesShowAndreas1.png?raw=true)
 
-On your container image (in my case andreas1) click the Play (>) button and configure a port mapping under the Basic tab by clicking on the 'Add customer port mapping' link. Use a free Host Port (like 8080) and map it to port 80 under Container Port. This is where your httpd will be listening. Then click at the bottom the long '> Start Container' button.
+On your container image (in my case andreas1) click the Play (>) button and configure a port mapping under the Basic tab by clicking on the 'Add custom port mapping' link. Use a free Host Port (like 8080) and map it to port 80 under Container Port. This is where your httpd will be listening. Then click at the bottom the long '> Start Container' button.
 
 ![Podman image registry](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/PodmanRunImage.png?raw=true)
 
