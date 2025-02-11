@@ -1,11 +1,13 @@
-#use rhel 9.5 bootc container image as base image
-FROM registry.redhat.io/rhel9/rhel-bootc:9.5
+#use the fedora 41 boot say base image
+FROM quay.io/fedora/fedora-bootc:41
 
-#install httpd, mariadb and php
+RUN adduser redhat;echo 'redhat:redhat' | chpasswd
+
+#install httpd
 RUN dnf install -y httpd
 
 #enable httpd, mariadb and php to start automatically on boot
 RUN systemctl enable httpd 
 
 #create an awe inspiring homepage, add the buildtime of the image as reference
-RUN echo '<h1 style="text-align:center;">Welcome to RHEL image mode - build time '$(date)' </h1> <?php phpinfo(); ?>' >> /var/www/html/index.php
+RUN echo '<h1 style="text-align:center;">Welcome to RHEL image mode via Fedora and bootC - build time '$(date)' </h1> <?php phpinfo(); ?>' >> /var/www/html/index.php
