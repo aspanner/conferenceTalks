@@ -77,4 +77,11 @@ We are now going to test our newly created Fedora Operating System which we buil
 and auto configuring...
 ![Fedora auto configuration](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/FedoraInstalling2.png?raw=true)
 
+...and finally up and running!
+![Fedora up and Running!](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/FedoraHttpdRunning.png?raw=true)
+
+#Congratulations!
+You have now completed the journey from creating a containerfile, built a container and subsequently built an Operating system originating from the very same Containerfile!
+
+Feel Proud and let's move to the next exercise...
 
