@@ -13,7 +13,7 @@ If you've got everything right then starting your Podman Desktop should greet yo
 
 ## Installing the bootC extension in Podman Desktop
 Navigate to the 'Extension' section in Podman Desktop, click on the 'Catalog' tab and search for 'Bootable Containers' and click the 'download/install' icon.
-![Install bootC extension](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/PodmanDesktopExtensionsInstalled.png?raw=true)
+![Install bootC extension](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/PodmanDesktopExtensionsInstalled2.png?raw=true)
 
 ## Building your first operating system iso image
 Without further delay, let's get cracking to get the first operating system build underway. After all time is money the Wolf of Wallstreet once said to me - when I was young.
