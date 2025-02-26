@@ -7,3 +7,4 @@ So let's get started with a first step by step guided exercise to get you famili
 https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/GettingStarted.MD
 
 ## Lab 2 - Show what you know
+https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/Lab2.MD
