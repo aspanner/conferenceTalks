@@ -20,6 +20,36 @@ approach is a way to combat the challenges of distributed environments such as:
 * Single Points of Failure a centralized application controller creates
 * Performance - centralized architecture can create a bottleneck
 
+Red Hat's approach is [Red Hat Edge Manager](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.13/html/edge_manager/edge-mgr-intro) and the associated upstream project [Flight Control] (https://github.com/flightctl/flightctl)
+
+## Let's get started.
+Create your project directory and then your agent subdirectory.
+In order to build your container based agent we'll create a containerfile and call it Containerfile_agent
+```# Use the most minimal Red Hat Universal Base Image
+FROM registry.access.redhat.com/ubi9/ubi-minimal:latest
+
+# Install Python using microdnf (minimal package manager)
+RUN microdnf install -y python3 && \
+    microdnf clean all
+
+# Create app directory with proper permissions
+RUN mkdir -p /app && \
+    chmod 755 /app && \
+    chown -R 1000:1000 /app
+
+# Copy Python application code
+COPY --chown=1000:1000 hello_agent.py /app/
+
+# Set the working directory
+WORKDIR /app
+
+# Switch to non-root user
+USER 1000:1000
+
+# Run the Python agent continuously with unbuffered output
+CMD ["python3", "-u", "hello_agent.py"]
+```
+
 
 
 ![Podman Desktop Startup Screen](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/PodmanDesktopStartupScreen2.png?raw=true)
