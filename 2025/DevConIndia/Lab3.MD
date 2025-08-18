@@ -261,10 +261,6 @@ Both you can see above.
 The first `RUN echo` command creates the build script in `/usr/local/bin/build-agent-container.sh`. The core of that build script is `podman build -t localhost/edge-agent-ubi:v1 -f Containerfile_agent .` which is pretty much what you did before. Only this time it runs within the operating system as a oneshot systemd service, which is what the next `RUN echo` line sets up.
 
 
-
-```
-
-
 ### Building in 3,2,1...
 Now let's build it:
 Because the following O/S image build process needs root permissions we are building the O/S image with 'sudo': `sudo podman build -t my-edge-bootc-os:v1 -f Containerfile.bootc .`
