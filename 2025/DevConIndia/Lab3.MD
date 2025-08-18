@@ -60,7 +60,7 @@ Now let's look at our agent code as well, we'll call it 'hello_agent.py'. As you
 ```
 #!/usr/bin/env python3
 """
-Management Agent for Immutable bootC Operating System
+Edge Management Agent for Immutable bootC Operating System
 Optimized for telemetry and lifecycle management tasks
 """
 
@@ -100,7 +100,7 @@ class ManagementAgent:
         self.message_count += 1
         
         # Core messaging
-        self.log_message("----------\n Hello, World! Management Agent running on immutable bootC OS")
+        self.log_message("----------\n Hello, World! Edge Management Agent running on immutable bootC OS")
         self.log_message("I am optimized for telemetry and lifecycle management tasks")
         self.log_message("OS changes should be made via Containerfile/build process updates")
         self.log_message("Immutable infrastructure ensures consistency and reliability")
