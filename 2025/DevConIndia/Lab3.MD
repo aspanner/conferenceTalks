@@ -23,6 +23,7 @@ approach is a way to combat the challenges of distributed environments such as:
 Red Hat's approach is [Red Hat Edge Manager](https://docs.redhat.com/en/documentation/red_hat_advanced_cluster_management_for_kubernetes/2.13/html/edge_manager/edge-mgr-intro) and the associated upstream project [Flight Control] (https://github.com/flightctl/flightctl)
 
 ## Let's get started.
+### Building the agent
 Create your project directory and then your agent subdirectory.
 In order to build your container based agent we'll create a containerfile and call it Containerfile_agent
 ```# Use the most minimal Red Hat Universal Base Image
@@ -49,6 +50,91 @@ USER 1000:1000
 # Run the Python agent continuously with unbuffered output
 CMD ["python3", "-u", "hello_agent.py"]
 ```
+Now let's look at our agent code as well, we'll call it 'hello_agent.py'. As you can see in the Containerfile above we are using python3 to run the agent script in unbuffered ("-u") mode so that the output appears immediately on stdout.
+
+```
+#!/usr/bin/env python3
+"""
+Management Agent for Immutable bootC Operating System
+Optimized for telemetry and lifecycle management tasks
+"""
+
+import time
+import sys
+import datetime
+import json
+import os
+from pathlib import Path
+
+
+class ManagementAgent:
+    """A comprehensive management agent for immutable OS environments."""
+    
+    def __init__(self, interval=30):
+        self.interval = interval
+        self.start_time = datetime.datetime.now()
+        self.message_count = 0
+        
+    def log_message(self, message, level="INFO"):
+        """Log a timestamped message."""
+        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        print(f"[{timestamp}] [{level}] {message}", flush=True)
+        sys.stdout.flush()
+        
+    def get_system_info(self):
+        """Gather basic system information."""
+        return {
+            "uptime": str(datetime.datetime.now() - self.start_time),
+            "message_count": self.message_count,
+            "python_version": sys.version.split()[0],
+            "container_user": os.getenv("USER", "unknown")
+        }
+        
+    def run_management_cycle(self):
+        """Execute one management cycle."""
+        self.message_count += 1
+        
+        # Core messaging
+        self.log_message("----------\n Hello, World! Management Agent running on immutable bootC OS")
+        self.log_message("I am optimized for telemetry and lifecycle management tasks")
+        self.log_message("OS changes should be made via Containerfile/build process updates")
+        self.log_message("Immutable infrastructure ensures consistency and reliability")
+        
+        # System status
+        info = self.get_system_info()
+        self.log_message(f"Agent uptime: {info['uptime']}")
+        self.log_message(f"Messages sent: {info['message_count']}")
+        
+        # Lifecycle management status
+        self.log_message("Performing lifecycle health check... OK")
+        self.log_message("Telemetry collection active and operational")
+        
+    def run(self):
+        """Main agent loop."""
+        self.log_message("Management Agent starting up...")
+        self.log_message(f"Configured interval: {self.interval} seconds")
+        
+        try:
+            while True:
+                self.run_management_cycle()
+                time.sleep(self.interval)
+        except KeyboardInterrupt:
+            self.log_message("Shutdown signal received", "WARN")
+        except Exception as e:
+            self.log_message(f"Error in management cycle: {e}", "ERROR")
+            raise
+
+
+if __name__ == "__main__":
+    # Configure from environment or use defaults
+    interval = int(os.getenv("AGENT_INTERVAL", "30"))
+    
+    agent = ManagementAgent(interval=interval)
+    agent.run()
+```
+
+
+
 Our containerfile has a few goodies in it we want to call out:
 * It build upon the latest version of the freely available, supported Red Hat minimal ubi container image.
 * It uses microdnf, a lightweigth, standalone package manager written in C to be faster and smaller than standard dnf for environments where speend and size matter
