@@ -261,7 +261,7 @@ Both you can see above.
 The first `RUN echo` command creates the build script in `/usr/local/bin/build-agent-container.sh`. The core of that build script is `podman build -t localhost/edge-agent-ubi:v1 -f Containerfile_agent .` which is pretty much what you did before. Only this time it runs within the operating system as a oneshot systemd service, which is what the next `RUN echo` line sets up.
 
 
-### Building in 3,2,1...
+### Building the bootC Container in 3,2,1...
 Now let's build it:
 Because the following O/S image build process needs root permissions we are building the O/S image with 'sudo': `sudo podman build -t my-edge-bootc-os:v1 -f Containerfile.bootc .`
 
@@ -272,6 +272,60 @@ COMMIT my-edge-bootc-os:v1
 Successfully tagged localhost/my-edge-bootc-os:v1
 b651c8b428d8cc7bc145e251e1731724bc8b436fadea363a7dcf54f3030417f9
 ```
+
+### Building the iso
+Converting the bootC container image into a bootable image support many different formats.
+Supported image types can be found here for open source 
+
+The bootc image builder needs elevated (sudo) privileges and this is how we build it:
+```
+ sudo podman run \
+    --rm \
+    -it \
+    --privileged \
+    --pull=newer \
+    --security-opt label=type:unconfined_t \
+    -v /var/lib/containers/storage:/var/lib/containers/storage \
+    -v $(pwd)/config.toml:/config.toml:ro \
+    -v $(pwd)/output:/output \
+    registry.redhat.io/rhel10/bootc-image-builder:latest \
+    --type iso \
+    --rootfs xfs \
+    --config /config.toml \
+    localhost/my-edge-bootc-os:v1
+```
+If everything goes to plan the output should look like this:
+
+```
+[|] Disk image building step
+[9 / 9] Pipeline bootiso [------------------------------------------------------------------------>] 100.00%
+[3 / 3] Stage org.osbuild.implantisomd5 [--------------------------------------------------------->] 100.00%
+Message: Results saved in .
+```
+
+Which leads us to the last step of this lab, building a virtual machine based on the iso we just created.
+The iso is stored under <your project folder>/output/bootiso/ and is called `install.iso`.
+
+On Fedora 4x we are using the `virt-install` command to build the virtual machine. Once you checked that the iso file got created with a 2.4Gb size and at the correct time you are now ready to build the vm:
+
+```
+sudo virt-install \
+-n myDevConfFedoraCLIImageModevm \
+--description "bootC & RHEL Image mode" \
+--os-variant=rhel9.5 \
+--ram=5048 \
+--vcpus=2 \
+--disk path=/var/lib/libvirt/images/myEdgeBootcOSVMdisk.img,bus=virtio,size=20 \
+--graphics vnc \
+--cdrom ./output/bootiso/install.iso \
+--network bridge:virbr0
+```
+
+
+
+
+
+
 
 
 
