@@ -309,10 +309,10 @@ The iso is stored under <your project folder>/output/bootiso/ and is called `ins
 On Fedora 4x we are using the `virt-install` command to build the virtual machine. Once you checked that the iso file got created with a 2.4Gb size and at the correct time you are now ready to build the vm:
 
 ```
-sudo virt-install \
+ sudo virt-install \       
 -n myDevConfFedoraCLIImageModevm \
 --description "bootC & RHEL Image mode" \
---os-variant=rhel9.5 \
+--os-variant=fedora41 \
 --ram=5048 \
 --vcpus=2 \
 --disk path=/var/lib/libvirt/images/myEdgeBootcOSVMdisk.img,bus=virtio,size=20 \
