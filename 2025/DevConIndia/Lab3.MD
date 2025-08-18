@@ -24,7 +24,7 @@ Red Hat's approach is [Red Hat Edge Manager](https://docs.redhat.com/en/document
 
 ## Let's get started.
 ### Building the agent
-Create your project directory and then your agent subdirectory.
+Create your project directory and then your agent subdirectory. Change directory (cd) into your agent directory.
 In order to build your container based agent we'll create a containerfile and call it Containerfile_agent
 ```# Use the most minimal Red Hat Universal Base Image
 FROM registry.access.redhat.com/ubi9/ubi-minimal:latest
@@ -140,11 +140,142 @@ if __name__ == "__main__":
 Now let's build the agent with `podman build -t edge-agent-ubi:v1 -f Containerfile_agent .`
 I've created a container repo on quay.io called "edge-agent" and I am pushing the agent container we've just built to it via `podman push localhost/edge-agent-ubi:v1 quay.io/aspanner/edge-agent:v1`.
 
-If everything went right you should now see your agent container image in your container registry:
+If everything went right you should now see your (only 53Mbyte big) agent container image in your container registry:
 ![Quay.io container registry showing the agent container](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/QuayAgentImage.png?raw=true)
 
+##Building your bootC __Container__ image
+The reason I highlighte container above is because to build your bootC Operating System (O/S) image it's a two step process:
+1) build the container image
+2) build the O/S image based off the container image
+
+## 1) Build the container image
+Move out of the agent directy in your project directory and inspect your container file for the bootC image:
+
+```
+# bootC OS Image with Python Management Agent
+FROM quay.io/fedora/fedora-bootc:41
+
+# Install container tools and Python for the host OS
+RUN dnf install -y \
+    podman \
+    python3 \
+    python3-pip \
+    systemd \
+    && dnf clean all
+
+# Create a user for running containers
+RUN useradd -m -G wheel bootcuser && \
+    echo 'bootcuser:bootcuser' | chpasswd
+
+# Copy the Python management agent source
+COPY agent/hello_agent.py /usr/local/bin/
+RUN chmod +x /usr/local/bin/hello_agent.py
+
+# Copy the agent Containerfile for building during firstboot
+COPY agent/Containerfile_agent /usr/local/share/containers/
+COPY agent/hello_agent.py /usr/local/share/containers/
+
+# Install the Quadlet service definition
+COPY agent/hello-agent.container /etc/containers/systemd/
+
+# Create a script to build the agent container on first boot
+RUN echo '#!/bin/bash' > /usr/local/bin/build-agent-container.sh && \
+    echo 'set -euo pipefail' >> /usr/local/bin/build-agent-container.sh && \
+    echo '' >> /usr/local/bin/build-agent-container.sh && \
+    echo 'echo "Building Python management agent container..."' >> /usr/local/bin/build-agent-container.sh && \
+    echo 'cd /usr/local/share/containers' >> /usr/local/bin/build-agent-container.sh && \
+    echo 'podman build -t quay.io/aspanner/edge-agent:v1 -f Containerfile_agent .' >> /usr/local/bin/build-agent-container.sh && \
+    echo '' >> /usr/local/bin/build-agent-container.sh && \
+    echo 'echo "Container built successfully!"' >> /usr/local/bin/build-agent-container.sh && \
+    echo 'podman images | grep edge-agent-ubi' >> /usr/local/bin/build-agent-container.sh && \
+    chmod +x /usr/local/bin/build-agent-container.sh
+
+# Create a oneshot service to build the container on first boot
+RUN echo '[Unit]' > /etc/systemd/system/build-agent-container.service && \
+    echo 'Description=Build Python Management Agent Container' >> /etc/systemd/system/build-agent-container.service && \
+    echo 'After=network-online.target podman.service' >> /etc/systemd/system/build-agent-container.service && \
+    echo 'Wants=network-online.target' >> /etc/systemd/system/build-agent-container.service && \
+    echo 'Before=edge-agent.service' >> /etc/systemd/system/build-agent-container.service && \
+    echo 'ConditionPathExists=!/var/lib/containers/agent-built' >> /etc/systemd/system/build-agent-container.service && \
+    echo '' >> /etc/systemd/system/build-agent-container.service && \
+    echo '[Service]' >> /etc/systemd/system/build-agent-container.service && \
+    echo 'Type=oneshot' >> /etc/systemd/system/build-agent-container.service && \
+    echo 'ExecStart=/usr/local/bin/build-agent-container.sh' >> /etc/systemd/system/build-agent-container.service && \
+    echo 'ExecStartPost=/bin/touch /var/lib/containers/agent-built' >> /etc/systemd/system/build-agent-container.service && \
+    echo 'RemainAfterExit=yes' >> /etc/systemd/system/build-agent-container.service && \
+    echo 'User=root' >> /etc/systemd/system/build-agent-container.service && \
+    echo '' >> /etc/systemd/system/build-agent-container.service && \
+    echo '[Install]' >> /etc/systemd/system/build-agent-container.service && \
+    echo 'RequiredBy=edge-agent.service' >> /etc/systemd/system/build-agent-container.service && \
+    echo 'WantedBy=multi-user.target' >> /etc/systemd/system/build-agent-container.service
+
+# Enable the container build service (Quadlet service will be auto-enabled)
+RUN systemctl enable build-agent-container.service
+
+# Configure podman for rootless containers
+RUN echo 'bootcuser:100000:65536' >> /etc/subuid && \
+    echo 'bootcuser:100000:65536' >> /etc/subgid
+
+# Create systemd user directory for bootcuser
+RUN mkdir -p /home/bootcuser/.config/systemd/user && \
+    chown -R bootcuser:bootcuser /home/bootcuser/.config
+
+# Add a welcome message
+RUN echo '==========================================' > /etc/motd && \
+    echo '  bootC OS with Python Management Agent' >> /etc/motd && \
+    echo '==========================================' >> /etc/motd && \
+    echo '' >> /etc/motd && \
+    echo 'This system includes:' >> /etc/motd && \
+    echo '- Python Management Agent running as Quadlet' >> /etc/motd && \
+    echo '- Immutable OS infrastructure' >> /etc/motd && \
+    echo '- Container-based application delivery' >> /etc/motd && \
+    echo '' >> /etc/motd && \
+    echo 'Monitor the agent:' >> /etc/motd && \
+    echo '  sudo journalctl -u edge-agent.service -f' >> /etc/motd && \
+    echo '' >> /etc/motd && \
+    echo 'Check agent status:' >> /etc/motd && \
+    echo '  sudo systemctl status edge-agent.service' >> /etc/motd && \
+    echo '' >> /etc/motd && \
+    echo 'Build information available at:' >> /etc/motd && \
+    echo '  /usr/local/share/containers/' >> /etc/motd && \
+    echo '' >> /etc/motd && \
+    echo '==========================================' >> /etc/motd
+
+# Set the default target
+RUN systemctl set-default multi-user.target
+```
+A few things to call out in the Containerfile.bootc are:
+* We are using the fedora-bootc:41 as a base image
+* The full python-based version of dnf is used
+* We are using a new user and group call "bootcuser"
+
+###Where do we get the container from?
+We've just pushed the container up to our Quay.io container registry and that's where we do get it from, right? But do we? Not this time.
+
+It  might be that in some edge environments there's no access to registries and for these occasions we show how we actually build the container in the target image via a oneshot service. In order to do so we need 2 components:
+1) The container build script
+2) The systemd oneshot quadlet configuration. 
+
+Both you can see above.
+
+The first `RUN echo` command creates the build script in `/usr/local/bin/build-agent-container.sh`. The core of that build script is `podman build -t localhost/edge-agent-ubi:v1 -f Containerfile_agent .` which is pretty much what you did before. Only this time it runs within the operating system as a oneshot systemd service, which is what the next `RUN echo` line sets up.
 
 
+
+```
+
+
+### Building in 3,2,1...
+Now let's build it:
+Because the following O/S image build process needs root permissions we are building the O/S image with 'sudo': `sudo podman build -t my-edge-bootc-os:v1 -f Containerfile.bootc .`
+
+Once that is built you should see a message a long the lines of:
+```
+COMMIT my-edge-bootc-os:v1
+--> b651c8b428d8
+Successfully tagged localhost/my-edge-bootc-os:v1
+b651c8b428d8cc7bc145e251e1731724bc8b436fadea363a7dcf54f3030417f9
+```
 
 
 
