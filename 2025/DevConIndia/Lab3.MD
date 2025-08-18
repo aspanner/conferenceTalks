@@ -141,7 +141,7 @@ Now let's build the agent with `podman build -t edge-agent-ubi:v1 -f Containerfi
 I've created a container repo on quay.io called "edge-agent" and I am pushing the agent container we've just built to it via `podman push localhost/edge-agent-ubi:v1 quay.io/aspanner/edge-agent:v1`.
 
 If everything went right you should now see your agent container image in your container registry:
-![Quay.io container registry showing the agent container](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/QuayAgentImage?raw=true)
+![Quay.io container registry showing the agent container](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/QuayAgentImage.png?raw=true)
 
 
 
