@@ -249,7 +249,7 @@ A few things to call out in the Containerfile.bootc are:
 * The full python-based version of dnf is used
 * We are using a new user and group call "bootcuser"
 
-###Where do we get the container from?
+### Where do we get the container from?
 We've just pushed the container up to our Quay.io container registry and that's where we do get it from, right? But do we? Not this time.
 
 It  might be that in some edge environments there's no access to registries and for these occasions we show how we actually build the container in the target image via a oneshot service. In order to do so we need 2 components:
