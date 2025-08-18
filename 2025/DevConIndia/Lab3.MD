@@ -49,6 +49,10 @@ USER 1000:1000
 # Run the Python agent continuously with unbuffered output
 CMD ["python3", "-u", "hello_agent.py"]
 ```
+Our containerfile has a few goodies in it we want to call out:
+* It build upon the latest version of the freely available, supported Red Hat minimal ubi container image.
+* It uses microdnf, a lightweigth, standalone package manager written in C to be faster and smaller than standard dnf for environments where speend and size matter
+* It uses the user (uid) and group (gid) of 1000, which is usually the first non root user in Linux systems.
 
 
 
