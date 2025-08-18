@@ -318,7 +318,8 @@ On Fedora 4x we are using the `virt-install` command to build the virtual machin
 --disk path=/var/lib/libvirt/images/myEdgeBootcOSVMdisk.img,bus=virtio,size=20 \
 --graphics vnc \
 --cdrom ./output/bootiso/install.iso \
---network bridge:virbr0
+--network bridge:virbr0 \
+--boot uefi
 ```
 
 
@@ -329,7 +330,7 @@ On Fedora 4x we are using the `virt-install` command to build the virtual machin
 
 
 
-#Other
+#Feedback?
 
 
 
