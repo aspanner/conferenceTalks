@@ -11,7 +11,7 @@ In this lab things get a lot more sophisticated, we'll
 The instructions and screenshots are from a Fedora 41 environment
 
 ## Context
-In edge environments agents (not the AI ones) are quite common pattern. 
+In edge environments, the use of agents (not the AI ones) is a quite common pattern. 
 From GitOps ([ArgoCD agent](https://argocd-agent.readthedocs.io/)) to Edge Fleet Management ([Avassa Edge Enforcer](https://avassa.io/platform/)) the agent based
 approach is a way to combat the challenges of distributed environments such as:
 * Network Complexity - the need for direct connections to the edge site
