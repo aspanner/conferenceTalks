@@ -327,7 +327,6 @@ part /boot --fstype=xfs --size=1024 --ondrive=vda
 part / --fstype=xfs --size=1 --grow --ondrive=vda
 
 services --enabled=sshd,chronyd
-firewall --enabled --service=ssh
 selinux --enforcing
 reboot
 """
