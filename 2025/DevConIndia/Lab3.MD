@@ -296,6 +296,7 @@ The bootc image builder needs elevated (sudo) privileges and this is how we buil
     -v $(pwd)/config.toml:/config.toml:ro \
     -v $(pwd)/output:/output \
     registry.redhat.io/rhel10/bootc-image-builder:latest \
+    --rootfs xfs
     --type iso \
     --config /config.toml \
     localhost/my-edge-bootc-os:v1
