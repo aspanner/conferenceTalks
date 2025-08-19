@@ -144,6 +144,7 @@ If everything went right you should now see your (only 53Mbyte big) agent contai
 ![Quay.io container registry showing the agent container](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/QuayAgentImage.png?raw=true)
 
 You can now run your container locally: ` podman run -it edge-agent-ubi:v1 /bin/bash `.
+With this command you'll end up win a bash shell inside your container. Move around and inspect what you find. Also try to run the hello_agent.py script. How did it get into the container?
 
 Now let's move on to the next step, from the container based agent to the operating system build via the bootC route.
 
@@ -155,7 +156,7 @@ It's a two step process:
 2) build the O/S image based off the container image
 
 ## 1) Build the container image
-Move out of the agent directy in your project directory and inspect your container file for the bootC image:
+Move out of the agent directory from within your project directory and inspect your container file for the bootC image:
 
 ```
 # bootC OS Image with Python Management Agent
