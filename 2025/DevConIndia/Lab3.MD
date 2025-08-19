@@ -364,7 +364,7 @@ On Fedora 4x we are using the `virt-install` command to build the virtual machin
 ```
 
 # Up & Running
-![Once you log into the Running Image](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/Lab3AgentOSImage.png?raw=true) you can run `journalctl -f' you should be able to observe the edge agent up & running, displaying the configured log messages.
+![Once you log into the Running Image](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/EdgeAgentUpRunning.png?raw=true) you can run `journalctl -f' you should be able to observe the edge agent up & running, displaying the configured log messages.
 
 
 
