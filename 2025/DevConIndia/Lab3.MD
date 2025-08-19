@@ -143,6 +143,10 @@ I've created a container repo on quay.io called "edge-agent" and I am pushing th
 If everything went right you should now see your (only 53Mbyte big) agent container image in your container registry:
 ![Quay.io container registry showing the agent container](https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/QuayAgentImage.png?raw=true)
 
+You can now run your container locally: ` podman run -it edge-agent-ubi:v1 /bin/bash `.
+
+Now let's move on to the next step, from the container based agent to the operating system build via the bootC route.
+
 ##Building your bootC __Container__ image
 The reason I highlighte container above is because to build your bootC Operating System (O/S) image it's a two step process:
 1) build the container image
