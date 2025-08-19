@@ -25,7 +25,7 @@ Red Hat's approach is [Red Hat Edge Manager](https://docs.redhat.com/en/document
 ## Let's get started.
 ### Building the agent
 Create your project directory and then your agent subdirectory. Change directory (cd) into your agent directory.
-In order to build your container based agent we'll create a containerfile and call it Containerfile_agent
+In order to build your container based agent we'll create a containerfile and call it Containerfile.agent
 ```# Use the most minimal Red Hat Universal Base Image
 FROM registry.access.redhat.com/ubi9/ubi-minimal:latest
 
