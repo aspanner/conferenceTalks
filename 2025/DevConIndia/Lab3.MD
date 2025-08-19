@@ -301,6 +301,40 @@ The bootc image builder needs elevated (sudo) privileges and this is how we buil
     --config /config.toml \
     localhost/my-edge-bootc-os:v1
 ```
+As you can see we are referencing a `config.toml` file which contains kickstart like build information. In our case it sets the timzone, language, network, uers and the EFI (Extendable Firmware Inteface (replacing legacy BIOS based boot sequences), boot and root partition, enables the systemd services we need and turns on SELinux (Security Enhanced Linux). Copy the config.toml file into your project directory (not the agent directory) and execute above command.
+
+```
+# Corrected config.toml contents
+
+# Kickstart configuration for automated installation
+[customizations.installer.kickstart]
+contents = """
+lang en_US.UTF-8
+keyboard us
+timezone Australia/Sydney --utc
+network --bootproto=dhcp --device=link --activate
+rootpw --plaintext redhat
+user --name=redhat --password=redhat --plaintext --gecos="Red Hat User" --groups=wheel
+# Clears all existing partitions and creates a new partition table
+clearpart --drives=vda --all --initlabel
+
+# Simplified manual partitioning for UEFI boot
+# 1. EFI System Partition (vfat)
+part /boot/efi --fstype=vfat --size=200 --ondrive=vda
+# 2. Boot Partition (xfs)
+part /boot --fstype=xfs --size=1024 --ondrive=vda
+# 3. Root Partition (xfs) - uses all remaining space
+part / --fstype=xfs --size=1 --grow --ondrive=vda
+
+services --enabled=sshd,chronyd
+firewall --enabled --service=ssh
+selinux --enforcing
+reboot
+"""
+
+```
+
+
 If everything goes to plan the output should look like this:
 
 ```
