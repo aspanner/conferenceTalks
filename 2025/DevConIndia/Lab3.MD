@@ -137,7 +137,7 @@ if __name__ == "__main__":
     agent = ManagementAgent(interval=interval)
     agent.run()
 ```
-Now let's build the agent with `podman build -t edge-agent-ubi:v1 -f Containerfile_agent .`
+Now let's build the agent with `podman build -t edge-agent-ubi:v1 -f Containerfile.agent .`
 I've created a container repo on quay.io called "edge-agent" and I am pushing the agent container we've just built to it via `podman push localhost/edge-agent-ubi:v1 quay.io/aspanner/edge-agent:v1`.
 
 If everything went right you should now see your (only 53Mbyte big) agent container image in your container registry:
