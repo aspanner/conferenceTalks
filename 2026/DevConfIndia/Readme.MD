@@ -23,3 +23,24 @@ lab-infra/
     ├── ansible.cfg      # Ansible settings
     ├── inventory.aws_ec2.yml # Dynamic inventory config
     └── playbook.yml     # Configuration tasks
+
+Check that the dynamic invetory is working via 
+```
+ansible-inventory -i ansible/inventory.aws_ec2.yml --graph
+```
+then run the playbook:
+```
+export ANSIBLE_HOST_KEY_CHECKING=False
+export ANSIBLE_NOCOWS=1
+
+ansible-playbook -i ansible/inventory.aws_ec2.yml ansible/playbook.yml --private-key=terraform/fedora-key-auto.pem
+```
+To login use
+
+```
+ssh -i terraform/fedora-key-auto.pem fedora@<SERVER_IP>
+```
+or
+```
+ssh redhat@<SERVER_IP>
+```
