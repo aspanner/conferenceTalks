@@ -1,0 +1,84 @@
+- name: Setup Unique Users and Enable Password Auth
+  hosts: role_fedora_server
+  gather_facts: no  # We turn this off initially because we need to wait for SSH
+  become: true
+  remote_user: fedora
+  
+  tasks:
+    - name: Wait for SSH to become available
+      ansible.builtin.wait_for_connection:
+        delay: 5
+        timeout: 300
+        sleep: 5
+
+    - name: Gather facts now that we are connected
+      ansible.builtin.setup:
+
+    - name: Install Git and common tools
+      ansible.builtin.dnf:
+        name: 
+          - git
+          - vim
+          - htop
+        state: present
+        update_cache: yes
+
+    - name: Install KVM and Virtualization tools
+      ansible.builtin.dnf:
+        name: "@virtualization"
+        state: present
+
+    - name: Configure libvirt to allow QEMU emulation if KVM fails
+      ansible.builtin.lineinfile:
+        path: /etc/libvirt/qemu.conf
+        line: 'user = "root"'
+        state: present
+
+    - name: Ensure libvirtd is started and enabled
+      ansible.builtin.service:
+        name: libvirtd
+        state: started
+        enabled: yes
+
+    - name: Disable failing serial-getty service on Bare Metal
+      ansible.builtin.systemd_service:
+        name: serial-getty@ttyS0.service
+        state: stopped
+        enabled: no
+        masked: yes
+      ignore_errors: yes  # In case it's already gone
+
+    - name: Add user to libvirt group
+      ansible.builtin.user:
+        name: "{{ item }}"
+        groups: libvirt
+        append: yes
+      loop:
+        - fedora
+        - redhat
+
+    - name: Extract server number from Name tag
+      set_fact:
+        # Using the aws_tags we mapped in the inventory
+        node_id: "{{ aws_tags.Name.split('-')[-1] }}"
+
+    - name: Create unique user (userX) with password (passwordX)
+      ansible.builtin.user:
+        name: "user{{ node_id }}"
+        password: "{{ ('password' + node_id) | password_hash('sha512') }}"
+        shell: /bin/bash
+        groups: wheel
+        state: present
+
+    - name: Enable Password Authentication in SSH
+      ansible.builtin.lineinfile:
+        path: /etc/ssh/sshd_config
+        regexp: '^PasswordAuthentication'
+        line: 'PasswordAuthentication yes'
+      notify: Restart SSH
+
+  handlers:
+    - name: Restart SSH
+      ansible.builtin.service:
+        name: sshd
+        state: restarted

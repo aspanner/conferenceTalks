@@ -1,0 +1,19 @@
+plugin: aws_ec2
+regions:
+  - ap-southeast-1
+filters:
+  # Ensure this matches EXACTLY what you have in Terraform tags
+  tag:Role: fedora-server
+  instance-state-name: [ 'running' ]
+
+# This tells Ansible to use the Public IP for SSH
+compose:
+  ansible_host: public_ip_address
+  # This fixes the "reserved name: tags" warning
+  aws_tags: tags
+
+# This creates the 'role_fedora_server' group
+keyed_groups:
+  - key: tags.Role
+    prefix: role
+    separator: "_"
