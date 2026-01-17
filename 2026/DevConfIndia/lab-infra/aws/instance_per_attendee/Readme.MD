@@ -47,4 +47,9 @@ or
 ```
 ssh redhat@<SERVER_IP>
 ```
-The relevant helper scripts help to setup the infrastructure (terraform  & ansible), verify the setup, generate the user list and cleanup/teardown.
+The relevant helper scripts help to 
+1) setup the infrastructure (terraform  & ansible), 
+2) verify the setup, 
+3) generate the user list and 
+4) cleanup/teardown.
+
