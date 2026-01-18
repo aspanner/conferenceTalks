@@ -272,7 +272,7 @@ The first `RUN echo` command creates the build script in `/usr/local/bin/build-a
 Now let's build it:
 Because the following O/S image build process needs root permissions we are building the O/S image with 'sudo': `sudo podman build -t my-edge-bootc-os:v1 -f Containerfile.bootc .`
 
-Once that is built you should see a message a long the lines of:
+Once that is built you should see a message along the lines of:
 ```
 COMMIT my-edge-bootc-os:v1
 --> b651c8b428d8
