@@ -6,5 +6,8 @@ So let's get started with a first step by step guided exercise to get you famili
 ## Lab 1 - The Getting Started Lab
 https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/GettingStarted.MD
 
-## Lab 2 - Show what you know
+## Lab 2 - Show what you've learned & be creative
 https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/Lab2.MD
+
+## Lab 3 - Deploy your Edge Agents at scale
+https://github.com/aspanner/conferenceTalks/blob/main/2025/DevConIndia/Lab3.MD
